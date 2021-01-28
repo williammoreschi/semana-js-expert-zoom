@@ -18,6 +18,17 @@ const onload = () => {
 
   const socketUrl = 'http://localhost:3000'
   const socketBuilder = new SocketBuilder({socketUrl})
+
+  const peerConfig = Object.values({
+    id: undefined,
+    config: {
+      port: 9000,
+      host: 'localhost',
+      path: '/'
+    }
+  })
+  const peerBuilder = new PeerBuilder({ peerConfig })
+  
   const view = new View()
   //view.renderVideo({userId: 'teste01', url: 'https://media.giphy.com/media/Anz7tHCWpW6ccpKFQc/giphy.mp4'})
   //view.renderVideo({userId: 'teste02', url: 'https://media.giphy.com/media/4julXRi7RwGesIzuQt/giphy.mp4'})
@@ -27,7 +38,8 @@ const onload = () => {
     view,
     media,
     room,
-    socketBuilder
+    socketBuilder,
+    peerBuilder
   }
 
   Business.initialize(deps)

@@ -17,14 +17,15 @@ const io = socketIo(server,{
 io.on('connection', socket => {
   console.log('connection',socket.id)
   socket.on('join-room', (roomId, userId) => {
+    
     // adicionando os usuários na mesma sala
     socket.join(roomId)
-    socket.to(roomId).broadcast.emit('user-connected',userId)
+    socket.to(roomId).broadcast.emit('user-connected', userId)
     
     // removendo os usuários na mesma sala
-    socket.on('disconnected', () => {
+    socket.on('disconnect', () => {
       console.log('disconnected!', roomId, userId)
-      socket.to(roomId).broadcast.emit('user-disconnected',userId)
+      socket.to(roomId).broadcast.emit('user-disconnected', userId)
     })
   })
 })
